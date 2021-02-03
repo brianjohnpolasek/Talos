@@ -19,6 +19,11 @@ public class Main extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
+        // Restrict bot to bot communication (for now)
+        if (event.getAuthor().isBot()){
+            return;
+        }
+
         System.out.println("Received message from " +
                 event.getAuthor().getName() +
                 ": " +

@@ -1,38 +1,25 @@
 import net.dv8tion.jda.core.AccountType;
+import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.OnlineStatus;
+import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import javax.security.auth.login.LoginException;
 
-public class Main extends ListenerAdapter {
+public class Main {
+    public static JDA jda;
+
     public static void main(String[] args) throws LoginException {
+
+
         // Create New Bot
-        JDABuilder builder = new JDABuilder(AccountType.BOT);
         config bot = new config();
-        builder.setToken(bot.getToken());
+        jda = new JDABuilder(AccountType.BOT).setToken(bot.getToken()).buildAsync();
 
-        // Create Ping Pong Listener
-        builder.addEventListener(new Main());
-        builder.buildAsync();
-    }
-
-    @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
-        // Restrict bot to bot communication (for now)
-        if (event.getAuthor().isBot()){
-            return;
-        }
-
-        System.out.println("Received message from " +
-                event.getAuthor().getName() +
-                ": " +
-                event.getMessage().getContentDisplay()
-        );
-
-        // Ping Pong
-        if (event.getMessage().getContentRaw().equals("!ping")) {
-            event.getChannel().sendMessage("pong!").queue();
-        }
+        jda.getPresence().setStatus(OnlineStatus.ONLINE);
+        jda.getPresence().setGame(Game.watching("Nothing"));
+        jda.addEventListener(new Commands());
     }
 }

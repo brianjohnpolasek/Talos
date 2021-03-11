@@ -1,13 +1,22 @@
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
-import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class Commands extends ListenerAdapter {
-    public void onGuildMessageReceived(GuildMessageReceivedEvent event){
-        String[] args = event.getMessage().getContentRaw().split("\\s+");
-
-        if (args[0].equalsIgnoreCase("!ping")){
-            event.getChannel().sendTyping().queue();
-            event.getChannel().sendMessage("!pong").queue();
+    @Override
+    public void onMessageReceived(MessageReceivedEvent event)
+    {
+        Message msg = event.getMessage();
+        if (msg.getContentRaw().equals("!ping"))
+        {
+            MessageChannel channel = event.getChannel();
+            long time = System.currentTimeMillis();
+            channel.sendMessage("Pong!") /* => RestAction<Message> */
+                    .queue(response /* => Message */ -> {
+                        response.editMessageFormat("Pong: %d ms", System.currentTimeMillis() - time).queue();
+                    });
         }
     }
 }

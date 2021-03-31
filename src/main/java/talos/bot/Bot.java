@@ -6,15 +6,19 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import javax.security.auth.login.LoginException;
 
-public class Main {
-    public static void main(String[] args) throws LoginException
-    {
-        config bot = new config();
+public class Bot {
 
-        JDABuilder.createLight(bot.getToken(), GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
+    private Bot() throws LoginException {
+        config config = new config();
+
+        JDABuilder.createLight(config.getToken(), GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
                 .addEventListeners(new Commands())
                 .setActivity(Activity.playing("Type !ping"))
                 .build();
+    }
+
+    public static void main(String[] args) throws LoginException {
+        new Bot();
     }
 
 

@@ -1,5 +1,4 @@
 .idea
 .gradle
-.github
 build
 /src/main/java/talos/bot/config.java

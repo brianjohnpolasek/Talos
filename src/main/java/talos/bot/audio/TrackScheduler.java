@@ -1,4 +1,4 @@
-package Audio;
+package talos.bot.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
@@ -9,14 +9,14 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * This class schedules tracks for the audio player. It contains the queue of tracks.
+ * This class schedules tracks for the talos.bot.audio player. It contains the queue of tracks.
  */
 public class TrackScheduler extends AudioEventAdapter {
     private final AudioPlayer player;
     private final BlockingQueue<AudioTrack> queue;
 
     /**
-     * @param player The audio player this scheduler uses
+     * @param player The talos.bot.audio player this scheduler uses
      */
     public TrackScheduler(AudioPlayer player) {
         this.player = player;

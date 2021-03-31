@@ -1,4 +1,4 @@
-package Audio;
+package talos.bot.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.playback.MutableAudioFrame;
@@ -29,7 +29,7 @@ public class AudioPlayerSendHandler implements AudioSendHandler {
 
     @Override
     public boolean canProvide() {
-        // returns true if audio was provided
+        // returns true if talos.bot.audio was provided
         return audioPlayer.provide(frame);
     }
 

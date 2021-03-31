@@ -1,4 +1,4 @@
 .idea
 .gradle
 build
-src/main/java/config.java
+src/main/java/talos.bot/config.java

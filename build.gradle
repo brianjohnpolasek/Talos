@@ -22,6 +22,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     compile 'net.dv8tion:JDA:4.2.0_240'
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile 'io.github.cdimascio:java-dotenv:5.2.2'
     implementation 'com.sedmelluq:lavaplayer:1.3.73'
 }
 

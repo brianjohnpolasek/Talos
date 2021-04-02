@@ -18,7 +18,7 @@ public class Bot {
     }
 
     public static void main(String[] args) throws LoginException {
-        new Bot();
+        new Bot()
     }
 
 

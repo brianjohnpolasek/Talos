@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.JDA;
 import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;
 
-public class Ping implements ICommands {
+public class PingModule implements ICommands {
 
     @Override
     public void handle(CommandsContext commandsContext) {
@@ -18,5 +18,10 @@ public class Ping implements ICommands {
     @Override
     public String getName() {
         return "ping";
+    }
+
+    @Override
+    public String getHelp() {
+        return "Returns the round-time trip from bot to Discord server in milliseconds.";
     }
 }

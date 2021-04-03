@@ -31,7 +31,6 @@ public class MessageHandler extends ListenerAdapter {
         //SHUTDOWN COMMAND
         if (message.equalsIgnoreCase(prefix + "shutdown")
                 && user.getId().equals(Config.get("OWNER_ID"))) {
-            channel.sendTyping().queue();
             channel.sendMessage("Goodbye cruel world!").queue();
             LOGGER.info("Shutdown.");
             event.getJDA().shutdown();

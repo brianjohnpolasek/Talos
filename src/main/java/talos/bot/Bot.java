@@ -9,10 +9,10 @@ import javax.security.auth.login.LoginException;
 public class Bot {
 
     private Bot() throws LoginException {
-        Config config = new Config();
+        //Config config = new Config();
 
-        JDABuilder.createLight(config.get("TOKEN"), GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
-                .addEventListeners(new Commands())
+        JDABuilder.createLight(Config.get("TOKEN"), GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
+                .addEventListeners(new MessageHandler())
                 .setActivity(Activity.playing("Always Watching"))
                 .build();
     }

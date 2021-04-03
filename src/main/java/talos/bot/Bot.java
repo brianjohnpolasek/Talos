@@ -9,16 +9,16 @@ import javax.security.auth.login.LoginException;
 public class Bot {
 
     private Bot() throws LoginException {
-        config config = new config();
+        Config config = new Config();
 
-        JDABuilder.createLight(config.getToken(), GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
+        JDABuilder.createLight(config.get("TOKEN"), GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
                 .addEventListeners(new Commands())
-                .setActivity(Activity.playing("Type !ping"))
+                .setActivity(Activity.playing("Always Watching"))
                 .build();
     }
 
     public static void main(String[] args) throws LoginException {
-        new Bot()
+        new Bot();
     }
 
 

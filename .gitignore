@@ -2,4 +2,3 @@
 .gradle/
 .env
 build/
-/src/main/java/talos/bot/config.java

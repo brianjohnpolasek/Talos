@@ -23,9 +23,13 @@ public class HelpModule implements ICommands {
 
         //Default response lists all possible commands
         if (args.isEmpty()) {
+            String prefix = Config.get("PREFIX");
+
             StringBuilder builder = new StringBuilder();
 
-            builder.append("Here are all of the commands:\n");
+            builder.append("Type '" + prefix + "help [command_name]' for more information.");
+
+            builder.append("Here are all of the commands:\n\n");
 
             handler.getAllCommands().stream().map(ICommands::getName).forEach((it) -> builder
                     .append("* ")

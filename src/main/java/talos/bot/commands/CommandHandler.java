@@ -62,10 +62,12 @@ public class CommandHandler {
 
     void handle(GuildMessageReceivedEvent event) {
 
+        String prefix = Config.get("PREFIX");
+        String message = event.getMessage().getContentRaw();
+
         //Remove prefix and whitespace
-        String[] split = event.getMessage()
-                .getContentRaw()
-                .replaceFirst("(?i)" + Pattern.quote(Config.get("PREFIX")), "")
+        String[] split = message
+                .replaceFirst("(?i)" + Pattern.quote(prefix), "")
                 .split("\\s+");
 
         //Get command to execute
@@ -89,5 +91,7 @@ public class CommandHandler {
             channel.sendTyping().queue();
             channel.sendMessage("Invalid command").queue();
         }
+
+        return;
     }
 }

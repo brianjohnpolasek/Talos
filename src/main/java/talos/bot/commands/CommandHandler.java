@@ -8,6 +8,7 @@ import talos.bot.commands.ICommands;
 import talos.bot.commands.modules.EchoModule;
 import talos.bot.commands.modules.HelpModule;
 import talos.bot.commands.modules.PingModule;
+import talos.bot.commands.modules.StatusModule;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class CommandHandler {
     public CommandHandler() {
         setCommand(new PingModule());
         setCommand(new EchoModule());
+        setCommand(new StatusModule());
         setCommand(new HelpModule(this));
     }
 

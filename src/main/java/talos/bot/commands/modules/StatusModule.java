@@ -16,7 +16,13 @@ public class StatusModule implements ICommands {
         JDA jda = commandsContext.getJDA();
         MessageHelper messageHelper = new MessageHelper(commandsContext, this.getName());
 
-        jda.getPresence().setActivity(Activity.playing(messageHelper.stripCommandName()));
+        if (messageHelper.checkArgs(2)) {
+            jda.getPresence().setActivity(Activity.playing(messageHelper.stripCommandName()));
+        }
+
+        else {
+            messageHelper.sendMessage("Please enter a valid status next time.");
+        }
 
         return;
     }

@@ -4,6 +4,8 @@ import talos.bot.Config;
 import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;
 
+import java.util.List;
+
 public class MessageHelper {
 
     private final CommandsContext commandsContext;
@@ -24,5 +26,9 @@ public class MessageHelper {
 
     public void sendMessage(String message) {
         this.commandsContext.getChannel().sendMessage(message).queue();
+    }
+
+    public boolean checkArgs(int numArgs) {
+        return commandsContext.getArgs().size() >= numArgs;
     }
 }

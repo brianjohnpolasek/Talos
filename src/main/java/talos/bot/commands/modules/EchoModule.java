@@ -1,18 +1,22 @@
 package talos.bot.commands.modules;
 
 import net.dv8tion.jda.api.JDA;
-import talos.bot.Config;
 import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;
+import talos.bot.helpers.MessageHelper;
 
 public class EchoModule implements ICommands {
     @Override
     public void handle(CommandsContext commandsContext) {
-        JDA jda = commandsContext.getJDA();
 
-        commandsContext.getChannel().sendTyping().queue();
-        commandsContext.getChannel().sendMessage(commandsContext.getMessage()
-                .getContentRaw().replace(Config.get("PREFIX") + this.getName(), "")).queue();
+        JDA jda = commandsContext.getJDA();
+        MessageHelper messageHelper = new MessageHelper(commandsContext, this.getName());
+
+        String message = messageHelper.stripCommandName();
+
+        messageHelper.sendMessage(message);
+
+        return;
     }
 
     @Override

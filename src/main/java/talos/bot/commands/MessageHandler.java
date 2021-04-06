@@ -1,4 +1,4 @@
-package talos.bot;
+package talos.bot.commands;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import talos.bot.Config;
 
 import javax.annotation.Nonnull;
 
@@ -31,7 +32,6 @@ public class MessageHandler extends ListenerAdapter {
         //SHUTDOWN COMMAND
         if (message.equalsIgnoreCase(prefix + "shutdown")
                 && user.getId().equals(Config.get("OWNER_ID"))) {
-            channel.sendTyping().queue();
             channel.sendMessage("Goodbye cruel world!").queue();
             LOGGER.info("Shutdown.");
             event.getJDA().shutdown();

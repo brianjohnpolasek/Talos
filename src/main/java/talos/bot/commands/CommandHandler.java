@@ -1,25 +1,31 @@
-package talos.bot;
+package talos.bot.commands;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import talos.bot.Config;
 import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;
-import talos.bot.commands.modules.Ping;
+import talos.bot.commands.modules.EchoModule;
+import talos.bot.commands.modules.HelpModule;
+import talos.bot.commands.modules.PingModule;
+import talos.bot.commands.modules.StatusModule;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class CommandHandler {
 
     private final List<ICommands> commands = new ArrayList<>();
 
-    //Constructor
+    //Constructor (REGISTER NEW COMMANDS HERE)
     public CommandHandler() {
-        setCommand(new Ping());
+        setCommand(new PingModule());
+        setCommand(new EchoModule());
+        setCommand(new StatusModule());
+        setCommand(new HelpModule(this));
     }
 
     //Check if command exists, adds if not
@@ -36,7 +42,7 @@ public class CommandHandler {
 
     //Returns command if it exists
     @Nullable
-    private ICommands getCommand(String name) {
+    public ICommands getCommand(String name) {
 
         //Search for command
         for (ICommands command : this.commands) {
@@ -47,6 +53,11 @@ public class CommandHandler {
 
         //No command found
         return null;
+    }
+
+    //Returns all commands
+    public List<ICommands> getAllCommands() {
+        return commands;
     }
 
     void handle(GuildMessageReceivedEvent event) {

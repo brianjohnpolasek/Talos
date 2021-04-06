@@ -1,7 +1,7 @@
 package talos.bot.commands.modules;
 
 import net.dv8tion.jda.api.entities.TextChannel;
-import talos.bot.CommandHandler;
+import talos.bot.commands.CommandHandler;
 import talos.bot.Config;
 import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;

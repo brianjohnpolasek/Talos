@@ -1,9 +1,11 @@
-package talos.bot;
+package talos.bot.commands;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import talos.bot.Config;
 import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;
+import talos.bot.commands.modules.EchoModule;
 import talos.bot.commands.modules.HelpModule;
 import talos.bot.commands.modules.PingModule;
 
@@ -20,6 +22,7 @@ public class CommandHandler {
     //Constructor (REGISTER NEW COMMANDS HERE)
     public CommandHandler() {
         setCommand(new PingModule());
+        setCommand(new EchoModule());
         setCommand(new HelpModule(this));
     }
 

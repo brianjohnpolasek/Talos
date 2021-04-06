@@ -12,6 +12,8 @@ public class HelpModule implements ICommands {
 
     private final CommandHandler handler;
 
+    private final String prefix = Config.get("PREFIX");
+
     public HelpModule(CommandHandler handler) {
         this.handler = handler;
     }
@@ -23,8 +25,6 @@ public class HelpModule implements ICommands {
 
         //Default response lists all possible commands
         if (args.isEmpty()) {
-            String prefix = Config.get("PREFIX");
-
             StringBuilder builder = new StringBuilder();
 
             builder.append("Type '" + prefix + "help [command_name]' for more information.");

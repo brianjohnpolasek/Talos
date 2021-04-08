@@ -3,8 +3,10 @@ package talos.bot;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.ReadyEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import talos.bot.commands.CommandHandler;
@@ -59,5 +61,20 @@ public class DiscordListener extends ListenerAdapter {
                 regexHelper.handle(event, response);
             }
         }
+    }
+
+    @Override
+    public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
+
+        if (event.getMember().getId().equals(Config.get("OWNER_ID"))) {
+
+            String nickname = event.getMember().getNickname();
+
+            event.getJDA()
+                    .getTextChannelById(Config.get("MAIN_TEXT_CHANNEL"))
+                    .sendMessage("HELLO THERE!" + nickname).queue()
+            ;
+        }
+
     }
 }

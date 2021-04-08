@@ -1,4 +1,4 @@
-package talos.bot.commands;
+package talos.bot;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
@@ -7,16 +7,16 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import talos.bot.Config;
+import talos.bot.commands.CommandHandler;
 import talos.bot.helpers.RegexHelper;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class MessageHandler extends ListenerAdapter {
+public class DiscordListener extends ListenerAdapter {
 
     private final CommandHandler handler = new CommandHandler();
-    private static final Logger LOGGER = LoggerFactory.getLogger(MessageHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DiscordListener.class);
 
     public RegexHelper regexHelper;
 

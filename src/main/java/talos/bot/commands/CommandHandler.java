@@ -58,7 +58,7 @@ public class CommandHandler {
         return commands;
     }
 
-    void handle(GuildMessageReceivedEvent event) {
+    public void handle(GuildMessageReceivedEvent event) {
 
         String prefix = Config.get("PREFIX");
         String message = event.getMessage().getContentRaw();

@@ -16,6 +16,8 @@ public class GuildMusicManager {
      */
     public final TrackScheduler scheduler;
 
+    private final AudioPlayerSendHandler sendHandler;
+
     /**
      * Creates a player and a track scheduler.
      * @param manager Audio player manager to use for creating the player.
@@ -24,12 +26,13 @@ public class GuildMusicManager {
         player = manager.createPlayer();
         scheduler = new TrackScheduler(player);
         player.addListener(scheduler);
+        sendHandler = new AudioPlayerSendHandler(player);
     }
 
     /**
      * @return Wrapper around AudioPlayer to use it as an AudioSendHandler.
      */
     public AudioPlayerSendHandler getSendHandler() {
-        return new AudioPlayerSendHandler(player);
+        return sendHandler;
     }
 }

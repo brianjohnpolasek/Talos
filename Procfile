@@ -1,0 +1,1 @@
+worker: java src/main/java/talos/bot/Bot.java

@@ -5,10 +5,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import talos.bot.Config;
 import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;
-import talos.bot.commands.modules.EchoModule;
-import talos.bot.commands.modules.HelpModule;
-import talos.bot.commands.modules.PingModule;
-import talos.bot.commands.modules.StatusModule;
+import talos.bot.commands.modules.*;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -25,6 +22,7 @@ public class CommandHandler {
         setCommand(new PingModule());
         setCommand(new EchoModule());
         setCommand(new StatusModule());
+        setCommand(new RegexModule());
         setCommand(new HelpModule(this));
     }
 

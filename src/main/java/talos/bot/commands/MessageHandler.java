@@ -11,6 +11,7 @@ import talos.bot.Config;
 import talos.bot.helpers.RegexHelper;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 public class MessageHandler extends ListenerAdapter {
 
@@ -40,8 +41,6 @@ public class MessageHandler extends ListenerAdapter {
             channel.sendMessage("Goodbye cruel world!").queue();
             LOGGER.info("Shutdown.");
             event.getJDA().shutdown();
-
-            return;
         }
 
         //OTHER COMMAND
@@ -51,12 +50,14 @@ public class MessageHandler extends ListenerAdapter {
         }
 
         //REGEX SEARCH
-        String regexSearch = regexHelper.regexSearch(message);
+        List<String> regexSearch = regexHelper.regexSearch(message);
 
-        if (regexSearch != "") {
-            regexHelper.handle(event, regexSearch);
+        if (regexSearch.size() > 0) {
+
+            for (String response: regexSearch
+                 ) {
+                regexHelper.handle(event, response);
+            }
         }
-
-        return;
     }
 }

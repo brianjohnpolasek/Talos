@@ -13,7 +13,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import java.util.HashMap;
 import java.util.Map;
 
-class PlayerManager {
+public class PlayerManager {
     private static PlayerManager INSTANCE;
     private final AudioPlayerManager playerManager;
     private final Map<Long, GuildMusicManager> musicManagers;
@@ -43,12 +43,14 @@ class PlayerManager {
     }
 
     public void loadAndPlay(TextChannel channel, String trackURL) {
-        GuildMusicManager musicManager = getGuildMusicManager(channel.getGuild());
+        final GuildMusicManager musicManager = getGuildMusicManager(channel.getGuild());
 
         playerManager.loadItemOrdered(musicManager, trackURL, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
                 channel.sendMessage("Adding " + track.getInfo().title + " to queue").queue();
+
+                musicManager.scheduler.queue(track);
 
                 play(musicManager, track);
             }

@@ -3,9 +3,7 @@ package talos.bot.commands;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import talos.bot.Config;
-import talos.bot.commands.CommandsContext;
-import talos.bot.commands.ICommands;
-import talos.bot.commands.modules.*;
+import talos.bot.commands.modules.text.*;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

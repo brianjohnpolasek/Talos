@@ -16,7 +16,7 @@ public class StatusModule implements ICommands {
         JDA jda = commandsContext.getJDA();
         MessageHelper messageHelper = new MessageHelper(commandsContext, this.getName());
 
-        if (messageHelper.checkArgs(2)) {
+        if (messageHelper.checkArgs(1)) {
             jda.getPresence().setActivity(Activity.playing(messageHelper.stripCommandName()));
         }
 

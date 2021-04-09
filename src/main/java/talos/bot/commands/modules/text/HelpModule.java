@@ -1,4 +1,4 @@
-package talos.bot.commands.modules;
+package talos.bot.commands.modules.text;
 
 import net.dv8tion.jda.api.entities.TextChannel;
 import talos.bot.commands.CommandHandler;

@@ -1,4 +1,4 @@
-package talos.bot.commands.modules;
+package talos.bot.commands.modules.text;
 
 import talos.bot.Config;
 import talos.bot.commands.CommandsContext;

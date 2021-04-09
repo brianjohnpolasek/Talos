@@ -1,1 +1,1 @@
-worker: java src/main/java/talos/bot/Bot.java
+worker: java -jar build/libs/Talos-3.0.1-all.jar

@@ -43,6 +43,8 @@ public class DiscordListener extends ListenerAdapter {
             channel.sendMessage("Goodbye cruel world!").queue();
             LOGGER.info("Shutdown.");
             event.getJDA().shutdown();
+
+            return;
         }
 
         //OTHER COMMAND

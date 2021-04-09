@@ -10,7 +10,7 @@ public class Bot {
 
     private Bot() throws LoginException {
 
-        JDABuilder.createLight(Config.get("TOKEN"), GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
+        JDABuilder.createLight(System.getenv("TOKEN"), GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
                 .addEventListeners(new DiscordListener())
                 .setActivity(Activity.watching(Config.get("DEFAULT_STATUS")))
                 .build();

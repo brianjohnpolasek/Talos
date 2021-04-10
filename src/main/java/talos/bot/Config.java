@@ -6,6 +6,7 @@ public class Config {
 
     //private static final Dotenv dotenv = Dotenv.load();
 
+
     private static final boolean isRemote = System.getenv("TOKEN") == null;
 
     public static String get(String key) {

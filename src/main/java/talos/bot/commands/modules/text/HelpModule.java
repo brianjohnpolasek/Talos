@@ -27,7 +27,7 @@ public class HelpModule implements ICommands {
         if (args.isEmpty()) {
             StringBuilder builder = new StringBuilder();
 
-            builder.append("Type '" + prefix + "help [command_name]' for more information.");
+            builder.append("Type '" + prefix + " help [command_name]' for more information.");
 
             builder.append("Here are all of the commands:\n\n");
 

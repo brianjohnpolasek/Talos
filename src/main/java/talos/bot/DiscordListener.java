@@ -15,6 +15,7 @@ import talos.bot.helpers.RegexHelper;
 import javax.annotation.Nonnull;
 import java.util.List;
 
+
 public class DiscordListener extends ListenerAdapter {
 
     private final CommandHandler handler = new CommandHandler();

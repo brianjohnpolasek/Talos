@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PlayerManager {
@@ -47,26 +48,24 @@ public class PlayerManager {
 
         playerManager.loadItemOrdered(musicManager, trackURL, new AudioLoadResultHandler() {
             @Override
-            public void trackLoaded(AudioTrack track) {
-                channel.sendMessage("Adding " + track.getInfo().title + " to queue").queue();
+            public void trackLoaded(AudioTrack song) {
+                channel.sendMessage("Adding " + song.getInfo().title + " to the queue").queue();
 
-                musicManager.scheduler.queue(track);
+                musicManager.getScheduler().queue(song);
 
-                play(musicManager, track);
+                play(musicManager, song);
             }
 
             @Override
             public void playlistLoaded(AudioPlaylist playlist) {
-                AudioTrack firstTrack = playlist.getSelectedTrack();
 
-                // See if first track is loaded
-                if (firstTrack == null) {
-                    firstTrack = playlist.getTracks().get(0);
+                final List<AudioTrack> songs = playlist.getTracks();
+
+                channel.sendMessage("From " + playlist.getName() + " adding" + songs.size() + " songs to the queue").queue();
+
+                for (final AudioTrack song: songs) {
+                    musicManager.getScheduler().queue(song);
                 }
-
-                channel.sendMessage("From " + playlist.getName() + " adding song " + firstTrack.getInfo().title + " to queue").queue();
-
-                play(musicManager, firstTrack);
             }
 
             @Override
@@ -82,7 +81,7 @@ public class PlayerManager {
     }
 
     private void play(GuildMusicManager musicManager, AudioTrack track) {
-        musicManager.scheduler.queue(track);
+        musicManager.getScheduler().queue(track);
     }
 
     public static synchronized PlayerManager getInstance() {

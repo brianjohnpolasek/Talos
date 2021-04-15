@@ -10,13 +10,11 @@ public class GuildMusicManager {
     /**
      * Audio player for the guild.
      */
-    public final AudioPlayer player;
+    private final AudioPlayer player;
     /**
      * Track scheduler for the player.
      */
-    public final TrackScheduler scheduler;
-
-    private final AudioPlayerSendHandler sendHandler;
+    private final TrackScheduler scheduler;
 
     /**
      * Creates a player and a track scheduler.
@@ -26,13 +24,20 @@ public class GuildMusicManager {
         player = manager.createPlayer();
         scheduler = new TrackScheduler(player);
         player.addListener(scheduler);
-        sendHandler = new AudioPlayerSendHandler(player);
     }
 
     /**
      * @return Wrapper around AudioPlayer to use it as an AudioSendHandler.
      */
     public AudioPlayerSendHandler getSendHandler() {
-        return sendHandler;
+        return new AudioPlayerSendHandler(player);
+    }
+
+    public AudioPlayer getPlayer() {
+        return player;
+    }
+
+    public TrackScheduler getScheduler() {
+        return scheduler;
     }
 }

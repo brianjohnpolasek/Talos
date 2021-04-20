@@ -3,6 +3,7 @@ package talos.bot.commands;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import talos.bot.Config;
+import talos.bot.commands.modules.audio.*;
 import talos.bot.commands.modules.text.*;
 
 import javax.annotation.Nullable;
@@ -21,6 +22,13 @@ public class CommandHandler {
         setCommand(new EchoModule());
         setCommand(new StatusModule());
         setCommand(new RegexModule());
+        setCommand(new JoinModule());
+        setCommand(new LeaveModule());
+        setCommand(new PlayModule());
+        setCommand(new PauseModule());
+        setCommand(new StopModule());
+        setCommand(new QueueModule());
+        setCommand(new PlayNextModule());
         setCommand(new HelpModule(this));
     }
 

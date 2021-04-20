@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class QueueModule implements ICommands {
     @Override
     public void handle(CommandsContext commandsContext) {
@@ -47,8 +48,7 @@ public class QueueModule implements ICommands {
                     .append(": **")
                     .append(trackInfo.title)
                     .append("** by *")
-                    .append(trackInfo.author)
-                    .append("* (" + dateFormat.format(time) + ")\n");
+                    .append(trackInfo.author).append("* (").append(dateFormat.format(time)).append(")\n");
         }
 
         //Check for overflow songs

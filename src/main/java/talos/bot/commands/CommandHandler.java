@@ -24,6 +24,7 @@ public class CommandHandler {
         setCommand(new StatusModule());
         setCommand(new RegexModule());
         setCommand(new WideModule());
+        setCommand(new HelpModule(this));
 
         //Audio Commands
         setCommand(new JoinModule());
@@ -33,7 +34,6 @@ public class CommandHandler {
         setCommand(new StopModule());
         setCommand(new QueueModule());
         setCommand(new PlayNextModule());
-        setCommand(new HelpModule(this));
     }
 
     //Check if command exists, adds if not

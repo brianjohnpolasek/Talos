@@ -72,7 +72,7 @@ public class PlayerManager {
             }
 
             @Override
-            public void loadFailed(FriendlyException exception) {
+            public void loadFailed(FriendlyException exception){
                 channel.sendMessage("Failed to play: " + exception.getMessage()).queue();
             }
         });

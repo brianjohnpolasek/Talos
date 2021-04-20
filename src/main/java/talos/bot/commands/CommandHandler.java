@@ -18,10 +18,15 @@ public class CommandHandler {
 
     //Constructor (REGISTER NEW COMMANDS HERE)
     public CommandHandler() {
+        //Text Commands
         setCommand(new PingModule());
         setCommand(new EchoModule());
         setCommand(new StatusModule());
         setCommand(new RegexModule());
+        setCommand(new WideModule());
+        setCommand(new HelpModule(this));
+
+        //Audio Commands
         setCommand(new JoinModule());
         setCommand(new LeaveModule());
         setCommand(new PlayModule());
@@ -29,7 +34,6 @@ public class CommandHandler {
         setCommand(new StopModule());
         setCommand(new QueueModule());
         setCommand(new PlayNextModule());
-        setCommand(new HelpModule(this));
     }
 
     //Check if command exists, adds if not

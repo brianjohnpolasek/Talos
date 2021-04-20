@@ -5,7 +5,6 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.managers.AudioManager;
 import talos.bot.Config;
-import talos.bot.audio.PlayerManager;
 import talos.bot.commands.CommandsContext;
 
 @SuppressWarnings("ConstantConditions")
@@ -29,7 +28,11 @@ public class AudioHelper {
         final AudioManager audioManager = commandsContext.getGuild().getAudioManager();
         final VoiceChannel voiceChannel = commandsContext.getGuild().getVoiceChannelById(Config.get("MAIN_AUDIO_CHANNEL"));
 
-        audioManager.openAudioConnection(voiceChannel);
+        try {
+            audioManager.openAudioConnection(voiceChannel);
+        }catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public void leave() {
@@ -43,7 +46,11 @@ public class AudioHelper {
 
         final AudioManager audioManager = commandsContext.getGuild().getAudioManager();
 
-        audioManager.closeAudioConnection();
+        try {
+            audioManager.closeAudioConnection();
+        }catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public CommandsContext getCommandsContext() {

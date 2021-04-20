@@ -1,7 +1,6 @@
 package talos.bot.commands.modules.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.managers.AudioManager;
 import talos.bot.Config;

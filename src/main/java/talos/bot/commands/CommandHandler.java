@@ -27,6 +27,7 @@ public class CommandHandler {
         setCommand(new PlayModule());
         setCommand(new StopModule());
         setCommand(new QueueModule());
+        setCommand(new PlayNextModule());
         setCommand(new HelpModule(this));
     }
 

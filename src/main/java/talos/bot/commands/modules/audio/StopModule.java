@@ -2,6 +2,7 @@ package talos.bot.commands.modules.audio;
 
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.managers.AudioManager;
 import talos.bot.audio.GuildMusicManager;
 import talos.bot.audio.PlayerManager;
 import talos.bot.commands.CommandsContext;
@@ -23,8 +24,13 @@ public class StopModule implements ICommands {
                 .getInstance()
                 .getGuildMusicManager(commandsContext.getGuild());
 
+        //Clear the queue
         musicManager.getScheduler().getPlayer().stopTrack();
         musicManager.getScheduler().getQueue().clear();
+
+        //Leave the voice channel
+        final AudioManager audioManager = commandsContext.getGuild().getAudioManager();
+        audioManager.closeAudioConnection();
 
         commandsContext.getChannel().sendMessage("Talos has stopped the music & cleared the queue.").queue();
     }

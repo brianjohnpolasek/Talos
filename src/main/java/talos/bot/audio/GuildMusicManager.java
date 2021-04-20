@@ -33,7 +33,7 @@ public class GuildMusicManager {
         return new AudioPlayerSendHandler(player);
     }
 
-    public AudioPlayer getPlayer() {
+    public AudioPlayer getAudioPlayer() {
         return player;
     }
 

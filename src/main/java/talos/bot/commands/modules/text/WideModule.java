@@ -18,7 +18,8 @@ public class WideModule implements ICommands {
 
         //Check arguments
         if (args.isEmpty()) {
-            message = String.valueOf(commandsContext.getChannel().getHistory().retrievePast(2));
+            sendWideHistory(textChannel, wideAmount);
+            return;
         }
         else {
 
@@ -26,15 +27,22 @@ public class WideModule implements ICommands {
             if (Character.digit(args.get(0).charAt(0), 10) > 0) {
 
                 wideAmount = Integer.parseInt(args.get(0));
-            }
 
-            //Check arguments again
-            if (args.isEmpty()) {
-                message = String.valueOf(commandsContext.getChannel().getHistory().retrievePast(2));
+                List<String> newArgs = args.subList(1, args.size());
+
+                //Check arguments again
+                if (newArgs.isEmpty()) {
+                    sendWideHistory(textChannel, wideAmount);
+                    return;
+                }
+                else {
+                    message = String.join(" ", newArgs);
+                }
             }
             else {
-                message = String.join(" ", args.subList(1, args.size()));
+                message = String.join(" ", args);
             }
+
         }
 
         //Add the spaces
@@ -56,5 +64,13 @@ public class WideModule implements ICommands {
                 .append("(A blank value defaults to 1 and supports a maximum of 9)");
         
         return helpMessage.toString();
+    }
+
+    public void sendWideHistory(TextChannel textChannel, int wideAmount) {
+        textChannel.getHistory().retrievePast(1)
+                .map(messages -> messages.get(0))
+                .queue((message) ->
+                        textChannel.sendMessage(message.getContentDisplay().replace("", " ".repeat(Math.max(0, wideAmount)))).queue()
+                );
     }
 }

@@ -67,7 +67,6 @@ public class PlayModule implements ICommands {
                 audioManager.openAudioConnection(voiceChannel);
             }catch (Exception e){
                 System.out.println(e);
-                return;
             }
         }
     }

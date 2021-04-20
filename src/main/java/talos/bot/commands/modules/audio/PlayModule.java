@@ -1,6 +1,7 @@
 package talos.bot.commands.modules.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.managers.AudioManager;
 import talos.bot.Config;
@@ -31,16 +32,6 @@ public class PlayModule implements ICommands {
 
         AudioHelper.getINSTANCE().setCommandsContext(commandsContext);
 
-        if (!talosVoiceState.inVoiceChannel()) {
-            //Error checking for multiple servers
-            try {
-                audioManager.openAudioConnection(voiceChannel);
-            }catch (Exception e){
-                System.out.println(e);
-                return;
-            }
-        }
-
         PlayerManager playerManager = PlayerManager.getInstance();
         TextChannel textChannel = commandsContext.getChannel();
 
@@ -63,6 +54,22 @@ public class PlayModule implements ICommands {
         }
 
         playerManager.loadAndPlay(textChannel, song);
+
+        final AudioTrack track = audioPlayer.getPlayingTrack();
+
+        if (track == null) {
+            return;
+        }
+
+        if (!talosVoiceState.inVoiceChannel()) {
+            //Error checking for multiple servers
+            try {
+                audioManager.openAudioConnection(voiceChannel);
+            }catch (Exception e){
+                System.out.println(e);
+                return;
+            }
+        }
     }
 
     @Override

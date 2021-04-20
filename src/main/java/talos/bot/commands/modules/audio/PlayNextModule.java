@@ -46,6 +46,7 @@ public class PlayNextModule implements ICommands {
             textChannel.sendMessage("SEE YOU SPACE COWBOY...").queue();
             musicManager.getScheduler().nextTrack();
             AudioHelper.getINSTANCE().leave();
+            return;
         }
 
         List<String> args = commandsContext.getArgs();

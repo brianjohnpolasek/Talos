@@ -52,8 +52,6 @@ public class PlayerManager {
                 channel.sendMessage("Adding " + song.getInfo().title + " to the queue").queue();
 
                 musicManager.getScheduler().queue(song);
-
-                play(musicManager, song);
             }
 
             @Override

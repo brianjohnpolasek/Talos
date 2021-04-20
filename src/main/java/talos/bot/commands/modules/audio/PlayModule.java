@@ -9,6 +9,7 @@ import talos.bot.audio.GuildMusicManager;
 import talos.bot.audio.PlayerManager;
 import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;
+import talos.bot.helpers.AudioHelper;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -26,7 +27,14 @@ public class PlayModule implements ICommands {
         final GuildMusicManager musicManager = PlayerManager.getInstance().getGuildMusicManager(guild);
         final AudioPlayer audioPlayer = musicManager.getAudioPlayer();
 
-        audioManager.openAudioConnection(voiceChannel);
+        final Member talosMember = commandsContext.getSelfMember();
+        final GuildVoiceState talosVoiceState = talosMember.getVoiceState();
+
+        AudioHelper.getINSTANCE().setCommandsContext(commandsContext);
+
+        if (!talosVoiceState.inVoiceChannel()) {
+            audioManager.openAudioConnection(voiceChannel);
+        }
 
         PlayerManager playerManager = PlayerManager.getInstance();
         TextChannel textChannel = commandsContext.getChannel();

@@ -8,11 +8,11 @@ The commands are currently categorized into sections that are either text, image
 
 ##### Text Commands
 * __Echo__ - This will have the bot say whatever message you want, or simply reiterate the last message in the channel. 
-    * Usage: _%echo [message]_
+    * Usage: _%echo {message}_
 
 
 * __Help__ - If no arguments are given, this will return a list of all commands, otherwise it will send a message describing the use case of the given command.
-    * Usage: _%help [commmand_name]_
+    * Usage: _%help {commmand_name}_
     
 
 * __Ping__ - The bot will respond with the round-trip delay of the Discord server.
@@ -28,12 +28,46 @@ The commands are currently categorized into sections that are either text, image
 
 
 * __Status__ - Allow users to modify the status of the Talos.
-    * Usage: _%status [custom_status]_
+    * Usage: _%status {custom_status}_
+
+
+* __Wide__ - Adds the specified number of spaces to widen the message.
+    * Usage: _%wide {size_or_blank}_
+    
+##### Audio Commands
+* __Join__ - Force Talos to join the default voice channel.
+    * Usage: _%join_
+
+
+* __Leave__ - Force Talos to leave the default voice channel.
+    * Usage: _%leave_
+
+
+* __Pause__ - Will pause the music if any is playing.
+    * Usage: _%pause_
+
+
+* __Play__ - Unpauses if possible, otherwise will play music given a specified URL or search name.
+    * Usage: 
+        * Unpause if possible: _%play_
+        * Add song to queue: _%play {url_or_search_name}_
+
+
+* __PlayNext__ - Skip a specified number of songs in the queue (or 1 by default).
+    * Usage: _%playnext {number_or_blank}_
+
+
+* __Queue__ - Display all current songs in the queue.
+    * Usage: _%queue_
+
+
+* __Stop__ - Talos will empty the queue and leave the voice channel.
+    * Usage: _%stop_
 
 ### Adding Commands
 Creating new commands can be done by adding a new class under the folder "src/java/talos/bot/commands/modules".
 
-This class should follow the naming convention of "[CommandName]Module" and should implement the ICommands interface.
+This class should follow the naming convention of "{CommandName}Module" and should implement the ICommands interface.
 This will allow users access to override the following methods:
 * __handle()__ - Where the logic of the command goes.
 * __getName()__ - Specify the name of the command so Talos knows when to execute the command.

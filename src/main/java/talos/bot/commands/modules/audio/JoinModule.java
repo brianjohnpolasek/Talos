@@ -1,10 +1,5 @@
 package talos.bot.commands.modules.audio;
 
-import net.dv8tion.jda.api.entities.GuildVoiceState;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.VoiceChannel;
-import net.dv8tion.jda.api.managers.AudioManager;
-import talos.bot.Config;
 import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;
 import talos.bot.helpers.AudioHelper;

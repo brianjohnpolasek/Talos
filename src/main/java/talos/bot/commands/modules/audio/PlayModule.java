@@ -33,7 +33,13 @@ public class PlayModule implements ICommands {
         AudioHelper.getINSTANCE().setCommandsContext(commandsContext);
 
         if (!talosVoiceState.inVoiceChannel()) {
-            audioManager.openAudioConnection(voiceChannel);
+            //Error checking for multiple servers
+            try {
+                audioManager.openAudioConnection(voiceChannel);
+            }catch (Exception e){
+                System.out.println(e);
+                return;
+            }
         }
 
         PlayerManager playerManager = PlayerManager.getInstance();

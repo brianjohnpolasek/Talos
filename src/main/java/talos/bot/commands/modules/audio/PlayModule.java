@@ -37,7 +37,6 @@ public class PlayModule implements ICommands {
                 audioManager.openAudioConnection(voiceChannel);
             }catch (Exception e){
                 System.out.println(e);
-                return;
             }
         }
 
@@ -60,9 +59,11 @@ public class PlayModule implements ICommands {
 
         if (!isUrl(song)) {
             song = "ytsearch:" + song;
+
         }
 
         playerManager.loadAndPlay(textChannel, song);
+
     }
 
     @Override

@@ -72,8 +72,12 @@ public class PlayerManager {
             }
 
             @Override
-            public void loadFailed(FriendlyException exception) {
+            public void loadFailed(FriendlyException exception){
                 channel.sendMessage("Failed to play: " + exception.getMessage()).queue();
+
+                if (musicManager.getScheduler().getPlayer().getPlayingTrack() == null) {
+                    channel.sendMessage("%leave").queue();
+                }
             }
         });
     }

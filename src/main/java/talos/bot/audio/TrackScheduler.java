@@ -17,6 +17,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class TrackScheduler extends AudioEventAdapter {
     private final AudioPlayer player;
     private final BlockingQueue<AudioTrack> queue;
+    public boolean repeating = false;
 
     /**
      * @param player The talos.bot.audio player this scheduler uses
@@ -52,7 +53,9 @@ public class TrackScheduler extends AudioEventAdapter {
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         // Only start the next track if the end reason is suitable for it (FINISHED or LOAD_FAILED)
+
         if (endReason.mayStartNext) {
+
             System.out.println("SONG FINISHED");
             final CommandsContext commandsContext = AudioHelper.getINSTANCE().getCommandsContext();
             final Guild guild = commandsContext.getGuild();
@@ -63,7 +66,15 @@ public class TrackScheduler extends AudioEventAdapter {
                 AudioHelper.getINSTANCE().leave();
             }
 
+            if (this.repeating) {
+                this.player.startTrack(track.makeClone(), false);
+                return;
+            }
+
             nextTrack();
+        }
+        else {
+            AudioHelper.getINSTANCE().leave();
         }
     }
 

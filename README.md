@@ -1,7 +1,7 @@
 # Talos
 
 ### Summary
-Java bot for Discord built using the [JDA][JDA] Object.
+Java bot for Discord built using [JDA][JDA].
 
 ### Commands
 The commands are currently categorized into sections that are either text, image or audio related commands.

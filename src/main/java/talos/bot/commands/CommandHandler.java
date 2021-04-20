@@ -18,10 +18,14 @@ public class CommandHandler {
 
     //Constructor (REGISTER NEW COMMANDS HERE)
     public CommandHandler() {
+        //Text Commands
         setCommand(new PingModule());
         setCommand(new EchoModule());
         setCommand(new StatusModule());
         setCommand(new RegexModule());
+        setCommand(new WideModule());
+
+        //Audio Commands
         setCommand(new JoinModule());
         setCommand(new LeaveModule());
         setCommand(new PlayModule());

@@ -39,9 +39,9 @@ public class DiscordListener extends ListenerAdapter {
         MessageChannel channel = event.getChannel();
 
         //IGNORE TEST SERVER
-        if (event.getGuild().getId().equals(Config.get("SERVER_ID"))) {
-            return;
-        }
+        //if (event.getGuild().getId().equals(Config.get("SERVER_ID"))) {
+        //    return;
+        //}
 
         //SHUTDOWN COMMAND
         if (message.equalsIgnoreCase(prefix + "shutdown")

@@ -59,7 +59,7 @@ public class PlayerManager {
 
                 final List<AudioTrack> songs = playlist.getTracks();
 
-                channel.sendMessage("From " + playlist.getName() + " adding" + songs.size() + " songs to the queue").queue();
+                channel.sendMessage("From " + playlist.getName() + " adding " + songs.size() + " songs to the queue").queue();
 
                 for (final AudioTrack song: songs) {
                     musicManager.getScheduler().queue(song);

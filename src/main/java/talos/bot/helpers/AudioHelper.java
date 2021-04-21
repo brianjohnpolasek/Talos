@@ -30,7 +30,7 @@ public class AudioHelper {
         //final VoiceChannel voiceChannel = commandsContext.getGuild().getVoiceChannelById(Config.get("MAIN_AUDIO_CHANNEL"));
 
         //Get the default voice channel to connect to
-        final VoiceChannel voiceChannel = commandsContext.getJDA().getVoiceChannels().get(0);
+        final VoiceChannel voiceChannel = commandsContext.getGuild().getVoiceChannels().get(0);
 
         try {
             audioManager.openAudioConnection(voiceChannel);

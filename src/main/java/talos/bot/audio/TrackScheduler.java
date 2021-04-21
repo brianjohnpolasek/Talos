@@ -74,7 +74,8 @@ public class TrackScheduler extends AudioEventAdapter {
             nextTrack();
         }
         else {
-            AudioHelper.getINSTANCE().leave();
+            System.out.println("Skipped / failed song.");
+            //AudioHelper.getINSTANCE().leave();
         }
     }
 

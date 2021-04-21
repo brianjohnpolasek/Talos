@@ -1,17 +1,14 @@
 package talos.bot.helpers;
 
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.GuildChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.internal.utils.tuple.Pair;
-import talos.bot.Bot;
 import talos.bot.Config;
 import talos.bot.commands.CommandsContext;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.URL;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,24 +24,8 @@ public class RegexHelper {
         // REPLACE WITH READ FROM FILE
         channelWhitelist.put(Config.get("MAIN_TEXT_CHANNEL"), true);
 
-        /* Insert all regex commands into dictionary */
-        try {
-            File regexTextFile = new File(Config.get("REGEX_PATH"));
-            Scanner scanner = new Scanner(regexTextFile);
-
-            while (scanner.hasNext()) {
-                String[] sections = scanner.nextLine().split(";");
-
-                if (sections.length == 3) {
-                    regexResponseMap.put(sections[0], Pair.of(sections[1], sections[2]));
-                }
-            }
-
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
+        //Create or refresh dictionary of regex commands
+        refreshRegex();
     }
 
     public static void setChannelWhitelistEntry(String id, Boolean flag) {
@@ -105,6 +86,35 @@ public class RegexHelper {
         }
 
         return responses;
+    }
+
+    public boolean nameExists(String name) {
+        for (Map.Entry<String, Pair<String, String>> set: regexResponseMap.entrySet()
+             ) {
+            if (set.getValue() != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void refreshRegex() {
+        try {
+            File regexTextFile = new File(Config.get("REGEX_PATH"));
+            Scanner scanner = new Scanner(regexTextFile);
+
+            while (scanner.hasNext()) {
+                String[] sections = scanner.nextLine().split(";");
+
+                if (sections.length == 3) {
+                    regexResponseMap.put(sections[0], Pair.of(sections[1], sections[2]));
+                }
+            }
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void handle(GuildMessageReceivedEvent event, String response) {

@@ -58,6 +58,8 @@ public class DiscordListener extends ListenerAdapter {
         }
 
         //REGEX SEARCH
+        regexHelper.refreshRegex();
+
         List<String> regexSearch = regexHelper.regexSearch(message);
 
         if (regexSearch.size() > 0) {

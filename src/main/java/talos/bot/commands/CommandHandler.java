@@ -35,6 +35,7 @@ public class CommandHandler {
         setCommand(new QueueModule());
         setCommand(new RepeatModule());
         setCommand(new StopModule());
+        setCommand(new VolumeModule());
     }
 
     //Check if command exists, adds if not

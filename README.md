@@ -21,14 +21,14 @@ The commands are currently categorized into sections that are either text, image
 
 * __Regex__ - By default, only the main text chat will listen for specific regex patterns. This command can be used to enable and disable text channels that respond to regex patterns.
     * Usage:
-        *Enable current channel: _%regex enable_
-        *Enable all channels: _%regex enable all_
-        *Disable current channel: _%regex disable_
-        *Disable all channels: _%regex disable all_      
+        * Enable current channel: _%regex enable_
+        * Enable all channels: _%regex enable all_
+        * Disable current channel: _%regex disable_
+        * Disable all channels: _%regex disable all_      
 
 
 * __Status__ - Allow users to modify the status of the Talos.
-    * Usage: _%status {custom_status}_
+    * Usage: _%status {watching/playing/listening} {custom_status}_
 
 
 * __Wide__ - Adds the specified number of spaces to widen the message.
@@ -64,6 +64,10 @@ The commands are currently categorized into sections that are either text, image
 * __Stop__ - Talos will empty the queue and leave the voice channel.
     * Usage: _%stop_
 
+
+* __Volume__ - Control the volume of Talos.
+    * Usage: _%volume_ {value (1-100)}
+    
 ### Adding Commands
 Creating new commands can be done by adding a new class under the folder "src/java/talos/bot/commands/modules".
 

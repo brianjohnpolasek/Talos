@@ -16,6 +16,7 @@ public class StatusModule implements ICommands {
         JDA jda = commandsContext.getJDA();
         MessageHelper messageHelper = new MessageHelper(commandsContext, this.getName());
 
+        //Set the status
         if (messageHelper.checkArgs(1)) {
             switch (commandsContext.getArgs().get(0).toLowerCase(Locale.ROOT)){
                 case "playing":

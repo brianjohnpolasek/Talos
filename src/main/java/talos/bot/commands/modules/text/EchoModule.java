@@ -1,6 +1,5 @@
 package talos.bot.commands.modules.text;
 
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.TextChannel;
 import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;
@@ -32,8 +31,8 @@ public class EchoModule implements ICommands {
     }
 
     public void sendEchoHistory(TextChannel textChannel) {
-        textChannel.getHistory().retrievePast(1)
-                .map(messages -> messages.get(0))
+        textChannel.getHistory().retrievePast(2)
+                .map(messages -> messages.get(1))
                 .queue((message) ->
                         textChannel.sendMessage(message.getContentDisplay()).queue()
                 );

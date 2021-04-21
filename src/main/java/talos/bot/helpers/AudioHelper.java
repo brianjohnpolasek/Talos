@@ -2,9 +2,9 @@ package talos.bot.helpers;
 
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.managers.AudioManager;
-import talos.bot.Config;
 import talos.bot.commands.CommandsContext;
 
 @SuppressWarnings("ConstantConditions")
@@ -17,30 +17,36 @@ public class AudioHelper {
     }
 
     public void join() {
+        final TextChannel textChannel = commandsContext.getChannel();
         final Member talosMember = commandsContext.getSelfMember();
         final GuildVoiceState talosVoiceState = talosMember.getVoiceState();
 
         if (talosVoiceState.inVoiceChannel()) {
-            commandsContext.getChannel().sendMessage("Talos is already in a voice channel.").queue();
+            textChannel.sendMessage("Talos is already in a voice channel.").queue();
             return;
         }
 
         final AudioManager audioManager = commandsContext.getGuild().getAudioManager();
-        final VoiceChannel voiceChannel = commandsContext.getGuild().getVoiceChannelById(Config.get("MAIN_AUDIO_CHANNEL"));
+        //final VoiceChannel voiceChannel = commandsContext.getGuild().getVoiceChannelById(Config.get("MAIN_AUDIO_CHANNEL"));
+
+        //Get the default voice channel to connect to
+        final VoiceChannel voiceChannel = commandsContext.getJDA().getVoiceChannels().get(0);
 
         try {
             audioManager.openAudioConnection(voiceChannel);
+            textChannel.sendMessage("Talos is in.").queue();
         }catch (Exception e) {
             System.out.println(e);
         }
     }
 
     public void leave() {
+        final TextChannel textChannel = commandsContext.getChannel();
         final Member talosMember = commandsContext.getSelfMember();
         final GuildVoiceState talosVoiceState = talosMember.getVoiceState();
 
         if (!talosVoiceState.inVoiceChannel()) {
-            commandsContext.getChannel().sendMessage("Talos isn't currently in a voice channel.").queue();
+            textChannel.sendMessage("Talos isn't currently in a voice channel.").queue();
             return;
         }
 
@@ -48,6 +54,7 @@ public class AudioHelper {
 
         try {
             audioManager.closeAudioConnection();
+            textChannel.sendMessage("Goodbye cruel world!").queue();
         }catch (Exception e) {
             System.out.println(e);
         }

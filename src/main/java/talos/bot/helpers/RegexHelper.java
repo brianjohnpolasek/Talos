@@ -48,7 +48,7 @@ public class RegexHelper {
     }
 
     public static void whitelistAll(CommandsContext commandsContext) {
-        List<TextChannel> allChannels = commandsContext.getJDA().getTextChannels();
+        List<TextChannel> allChannels = commandsContext.getGuild().getTextChannels();
 
         for (TextChannel channel: allChannels
              ) {
@@ -59,7 +59,7 @@ public class RegexHelper {
     }
 
     public static void blacklistAll(CommandsContext commandsContext) {
-        List<TextChannel> allChannels = commandsContext.getJDA().getTextChannels();
+        List<TextChannel> allChannels = commandsContext.getGuild().getTextChannels();
 
         for (TextChannel channel: allChannels
         ) {

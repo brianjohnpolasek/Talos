@@ -5,6 +5,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.requests.restaction.MessageAction;
+import talos.bot.Config;
 import talos.bot.audio.GuildMusicManager;
 import talos.bot.audio.PlayerManager;
 import talos.bot.commands.CommandsContext;
@@ -68,6 +69,13 @@ public class QueueModule implements ICommands {
 
     @Override
     public String getHelp() {
-        return "Provides the user with the current audio queue.";
+        return "Provides the user with the current audio queue.\n\n**Usage:** "
+                + Config.get("PREFIX")
+                + "queue";
+    }
+
+    @Override
+    public List<String> getAliases() {
+        return List.of("songs", "song", "playing");
     }
 }

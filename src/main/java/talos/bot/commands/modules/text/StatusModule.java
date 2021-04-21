@@ -1,7 +1,6 @@
 package talos.bot.commands.modules.text;
 
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import talos.bot.Config;
 import talos.bot.commands.CommandsContext;
@@ -9,6 +8,7 @@ import talos.bot.commands.ICommands;
 import talos.bot.helpers.MessageHelper;
 
 import java.util.List;
+import java.util.Locale;
 
 public class StatusModule implements ICommands {
     @Override
@@ -17,14 +17,20 @@ public class StatusModule implements ICommands {
         MessageHelper messageHelper = new MessageHelper(commandsContext, this.getName());
 
         if (messageHelper.checkArgs(1)) {
-            jda.getPresence().setActivity(Activity.playing(messageHelper.stripCommandName()));
+            switch (commandsContext.getArgs().get(0).toLowerCase(Locale.ROOT)){
+                case "playing":
+                    jda.getPresence().setActivity(Activity.playing(messageHelper.stripCommandName().replace("playing", ""))); break;
+                case "watching":
+                    jda.getPresence().setActivity(Activity.watching(messageHelper.stripCommandName().replace("watching", ""))); break;
+                case "listening":
+                    jda.getPresence().setActivity(Activity.listening(messageHelper.stripCommandName().replace("listening", ""))); break;
+                default:
+                    jda.getPresence().setActivity(Activity.watching(messageHelper.stripCommandName())); break;
+            }
         }
-
         else {
             messageHelper.sendMessage("Please enter a valid status next time.");
         }
-
-        return;
     }
 
     @Override
@@ -34,7 +40,9 @@ public class StatusModule implements ICommands {
 
     @Override
     public String getHelp() {
-        return "Use to set custom status for Talos.";
+        return "Use to set custom status for Talos.\n\n**Usage:** "
+                + Config.get("PREFIX")
+                + "status [WATCHING/PLAYING/LISTENING/BLANK] [CUSTOM_STATUS]";
     }
 
     @Override

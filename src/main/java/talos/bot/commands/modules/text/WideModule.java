@@ -67,8 +67,8 @@ public class WideModule implements ICommands {
     }
 
     public void sendWideHistory(TextChannel textChannel, int wideAmount) {
-        textChannel.getHistory().retrievePast(1)
-                .map(messages -> messages.get(0))
+        textChannel.getHistory().retrievePast(2)
+                .map(messages -> messages.get(1))
                 .queue((message) ->
                         textChannel.sendMessage(message.getContentDisplay().replace("", " ".repeat(Math.max(0, wideAmount)))).queue()
                 );

@@ -6,6 +6,9 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
+import org.slf4j.LoggerFactory;
+import talos.bot.Config;
+import talos.bot.DiscordListener;
 import talos.bot.audio.GuildMusicManager;
 import talos.bot.audio.PlayerManager;
 import talos.bot.commands.CommandsContext;
@@ -58,7 +61,16 @@ public class PlayNextModule implements ICommands {
             musicManager.getScheduler().nextTrack();
         }
         else {
-            numSkips = Integer.parseInt(args.get(0));
+            try {
+                numSkips = Integer.parseInt(args.get(0));
+            }catch (NumberFormatException e) {
+                LoggerFactory.getLogger(DiscordListener.class).error(String.valueOf(e));
+
+                //Skip normally
+                textChannel.sendMessage("Playing next track.").queue();
+                musicManager.getScheduler().nextTrack();
+                return;
+            }
 
             //Make sure enough songs are in queue
             if (queue.size() > numSkips) {
@@ -82,12 +94,9 @@ public class PlayNextModule implements ICommands {
 
     @Override
     public String getHelp() {
-        StringBuilder message = new StringBuilder();
-
-        message.append("Allows users to skip ahead in the audio queue.\n\n")
-                .append("**Usage: ** *%playnext [NUMBER_OR_BLANK]*\n");
-
-        return message.toString();
+        return "Allows users to skip ahead in the audio queue.\n\n**Usage:** "
+                + Config.get("PREFIX")
+                + "playnext [NUMBER_OR_BLANK]";
     }
 
     @Override

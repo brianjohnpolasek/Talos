@@ -1,9 +1,6 @@
 package talos.bot.helpers;
 
-import net.dv8tion.jda.api.entities.GuildVoiceState;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.managers.AudioManager;
 import talos.bot.commands.CommandsContext;
 
@@ -11,6 +8,10 @@ import talos.bot.commands.CommandsContext;
 public class AudioHelper {
     private static AudioHelper INSTANCE;
     private CommandsContext commandsContext;
+
+    public CommandsContext getCommandsContext() {
+        return commandsContext;
+    }
 
     public void setCommandsContext(CommandsContext commandsContext) {
         this.commandsContext = commandsContext;
@@ -60,8 +61,8 @@ public class AudioHelper {
         }
     }
 
-    public CommandsContext getCommandsContext() {
-        return commandsContext;
+    public void setListingStatus(String songName) {
+        getCommandsContext().getJDA().getPresence().setActivity(Activity.listening(songName));
     }
 
     public static synchronized AudioHelper getINSTANCE() {

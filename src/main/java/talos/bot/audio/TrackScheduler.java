@@ -78,6 +78,11 @@ public class TrackScheduler extends AudioEventAdapter {
         }
     }
 
+    @Override
+    public void onTrackStart(AudioPlayer player, AudioTrack track) {
+        AudioHelper.getINSTANCE().setListingStatus(track.getInfo().title);
+    }
+
     public AudioPlayer getPlayer() {
         return player;
     }

@@ -104,7 +104,7 @@ public class RegexModule implements ICommands {
         RegexHelper regexHelper = new RegexHelper();
 
         //Check if name exists
-        if (!regexHelper.nameExists(name)) {
+        if (regexHelper.nameExists(name)) {
             textChannel.sendMessage("Already added the regex under the name **" + name + "**").queue();
             return;
         }
@@ -112,6 +112,12 @@ public class RegexModule implements ICommands {
         //Check to see if regex already exists
         if (!regexHelper.regexSearch(command).isEmpty()) {
             textChannel.sendMessage("Already added the regex **" + command + "** or a similar one.").queue();
+            return;
+        }
+
+        //Check to see if response already exists
+        if (regexHelper.responseExists(response)) {
+            textChannel.sendMessage("Already added the response **" + response + "** or a similar one.").queue();
             return;
         }
 

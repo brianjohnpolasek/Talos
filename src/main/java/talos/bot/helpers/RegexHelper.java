@@ -88,10 +88,20 @@ public class RegexHelper {
         return responses;
     }
 
+    public boolean responseExists(String response) {
+        for (Map.Entry<String, Pair<String, String>> set: regexResponseMap.entrySet()
+        ) {
+            if (set.getValue().getRight().contains(response)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean nameExists(String name) {
         for (Map.Entry<String, Pair<String, String>> set: regexResponseMap.entrySet()
              ) {
-            if (set.getValue() != null) {
+            if (set.getKey().equals(name)) {
                 return true;
             }
         }

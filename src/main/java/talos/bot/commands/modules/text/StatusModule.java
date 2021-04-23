@@ -28,6 +28,7 @@ public class StatusModule implements ICommands {
                 default:
                     jda.getPresence().setActivity(Activity.watching(messageHelper.stripCommandName())); break;
             }
+            messageHelper.sendMessage("Status successfully set.");
         }
         else {
             messageHelper.sendMessage("Please enter a valid status next time.");

@@ -8,7 +8,7 @@ plugins {
 mainClassName = 'talos.bot.Bot'
 
 group 'org.example'
-version '3.0.1'
+version '3.0.2'
 
 sourceCompatibility = JavaVersion.VERSION_11
 
@@ -24,6 +24,8 @@ dependencies {
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
     compile 'io.github.cdimascio:java-dotenv:5.2.2'
     implementation 'com.sedmelluq:lavaplayer:1.3.73'
+    implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.1003')
+    implementation 'com.amazonaws:aws-java-sdk-s3'
 }
 
 test {0
@@ -36,6 +38,6 @@ build.mustRunAfter test
 
 jar {
     manifest {
-        attributes 'Class-Path': 'libs/Talos-3.0.1-all.jar', 'Main-Class': 'talos.bot.Bot'
+        attributes 'Class-Path': 'libs/Talos-3.0.2-all.jar', 'Main-Class': 'talos.bot.Bot'
     }
 }

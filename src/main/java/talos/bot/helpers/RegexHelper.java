@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.internal.utils.tuple.Pair;
 import talos.bot.Config;
+import talos.bot.aws.S3Manager;
 import talos.bot.commands.CommandsContext;
 
 import java.io.File;
@@ -18,6 +19,8 @@ public class RegexHelper {
     private static final HashMap<String, Boolean> channelWhitelist = new HashMap<>();
 
     private final HashMap<String, Pair<String, String>> regexResponseMap = new HashMap<>();
+
+    private S3Manager s3Manager = new S3Manager();
 
     public RegexHelper() {
 
@@ -109,6 +112,13 @@ public class RegexHelper {
     }
 
     public void refreshRegex() {
+
+        //Attempt to refresh regex text file from S3
+        if (!s3Manager.downloadObject("talostext", "regex.txt", Config.get("REGEX_PATH"))) {
+            s3Manager.uploadObject("talostext", "regex.txt", Config.get("REGEX_PATH"));
+        }
+
+        //Refresh regex map with data from regex text file
         try {
             File regexTextFile = new File(Config.get("REGEX_PATH"));
             Scanner scanner = new Scanner(regexTextFile);
@@ -125,6 +135,10 @@ public class RegexHelper {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateRegex() {
+        s3Manager.uploadObject("talostext", "regex.txt", Config.get("REGEX_PATH"));
     }
 
     public void handle(GuildMessageReceivedEvent event, String response) {

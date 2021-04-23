@@ -24,7 +24,8 @@ The commands are currently categorized into sections that are either text, image
         * Enable current channel: _%regex enable_
         * Enable all channels: _%regex enable all_
         * Disable current channel: _%regex disable_
-        * Disable all channels: _%regex disable all_      
+        * Disable all channels: _%regex disable all_
+        * Add new Regex command: _%regex add {name;regex;response}_      
 
 
 * __Status__ - Allow users to modify the status of the Talos.

@@ -147,6 +147,8 @@ public class RegexModule implements ICommands {
             return;
         }
 
+        regexHelper.updateRegex();
+
         textChannel.sendMessage("Added *" + args.get(0) + "* successfully.").queue();
     }
 

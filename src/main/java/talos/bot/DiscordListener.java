@@ -33,6 +33,11 @@ public class DiscordListener extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event)
     {
+        //IGNORE SELF
+        if (event.getMember().getId().equals(Config.get("BOT_ID"))) {
+            return;
+        }
+
         String prefix = Config.get("PREFIX");
         User user = event.getAuthor();
         String message = event.getMessage().getContentRaw();

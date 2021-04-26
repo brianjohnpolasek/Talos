@@ -64,6 +64,7 @@ public class TrackScheduler extends AudioEventAdapter {
 
             if (queue.isEmpty()) {
                 AudioHelper.getINSTANCE().leave();
+                AudioHelper.getINSTANCE().resetActivity();
             }
 
             if (this.repeating) {

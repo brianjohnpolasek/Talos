@@ -7,6 +7,7 @@ import talos.bot.audio.GuildMusicManager;
 import talos.bot.audio.PlayerManager;
 import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;
+import talos.bot.helpers.AudioHelper;
 
 @SuppressWarnings("ConstantConditions")
 public class StopModule implements ICommands {
@@ -33,6 +34,8 @@ public class StopModule implements ICommands {
         audioManager.closeAudioConnection();
 
         commandsContext.getChannel().sendMessage("Talos has stopped the music & cleared the queue.").queue();
+
+        AudioHelper.getINSTANCE().resetActivity();
     }
 
     @Override

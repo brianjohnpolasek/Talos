@@ -30,6 +30,7 @@ public class PlayModule implements ICommands {
         final GuildVoiceState talosVoiceState = talosMember.getVoiceState();
 
         AudioHelper.getINSTANCE().setCommandsContext(commandsContext);
+        AudioHelper.getINSTANCE().setPreviousActivity(commandsContext.getJDA().getPresence().getActivity());
 
         if (!talosVoiceState.inVoiceChannel()) {
             //Error checking for multiple servers

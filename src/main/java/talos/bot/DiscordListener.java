@@ -14,6 +14,7 @@ import talos.bot.helpers.RegexHelper;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Objects;
 
 
 public class DiscordListener extends ListenerAdapter {
@@ -34,7 +35,7 @@ public class DiscordListener extends ListenerAdapter {
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event)
     {
         //IGNORE SELF
-        if (event.getMember().getId().equals(Config.get("BOT_ID"))) {
+        if (Objects.requireNonNull(event.getMember()).getId().equals(Config.get("BOT_ID"))) {
             return;
         }
 

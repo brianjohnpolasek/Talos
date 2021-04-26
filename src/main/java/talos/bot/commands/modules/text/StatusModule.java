@@ -1,6 +1,7 @@
 package talos.bot.commands.modules.text;
 
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import talos.bot.Config;
 import talos.bot.commands.CommandsContext;
@@ -19,6 +20,8 @@ public class StatusModule implements ICommands {
         //Set the status
         if (messageHelper.checkArgs(1)) {
             switch (commandsContext.getArgs().get(0).toLowerCase(Locale.ROOT)){
+                case "reset":
+                    jda.getPresence().setPresence(OnlineStatus.ONLINE, null); break;
                 case "playing":
                     jda.getPresence().setActivity(Activity.playing(messageHelper.stripCommandName().replace("playing", ""))); break;
                 case "watching":

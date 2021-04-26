@@ -10,7 +10,7 @@ public class EchoModule implements ICommands {
     public void handle(CommandsContext commandsContext) {
 
         MessageHelper messageHelper = new MessageHelper(commandsContext, this.getName());
-        String message = messageHelper.stripCommandName();
+        String message = String.join(" ", commandsContext.getArgs());
 
         if (message.isEmpty()){
             sendEchoHistory(commandsContext.getChannel());

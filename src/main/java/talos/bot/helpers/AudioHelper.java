@@ -8,6 +8,7 @@ import talos.bot.commands.CommandsContext;
 public class AudioHelper {
     private static AudioHelper INSTANCE;
     private CommandsContext commandsContext;
+    private Activity previousActivity;
 
     public CommandsContext getCommandsContext() {
         return commandsContext;
@@ -63,6 +64,14 @@ public class AudioHelper {
 
     public void setListingStatus(String songName) {
         getCommandsContext().getJDA().getPresence().setActivity(Activity.listening(songName));
+    }
+
+    public void resetActivity() {
+        getCommandsContext().getJDA().getPresence().setActivity(previousActivity);
+    }
+
+    public void setPreviousActivity(Activity activity) {
+        previousActivity = activity;
     }
 
     public static synchronized AudioHelper getINSTANCE() {

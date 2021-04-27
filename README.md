@@ -95,6 +95,7 @@ An example environment file has been provided in the code above to understand th
 * [dotenv java][DotEnv] - Used for simplifying setting up environment variables.
 * [LavaPlayer][LavaPlayer] - Java API for handling audio streaming in Discord.
 * [AWS SDK][AWS] - Uses Amazon S3 for persistent runtime storage.
+* [Stock API][YahooAPI] - Library for retrieving stock data from Yahoo Finance.
 
 <!-- Links -->
 [Gradle]: https://gradle.org/releases/
@@ -103,3 +104,4 @@ An example environment file has been provided in the code above to understand th
 [DotEnv]: https://github.com/cdimascio/dotenv-java
 [LavaPlayer]: https://github.com/sedmelluq/lavaplayer
 [AWS]: https://aws.amazon.com/getting-started/tools-sdks/
+[YahooAPI]: https://financequotes-api.com/

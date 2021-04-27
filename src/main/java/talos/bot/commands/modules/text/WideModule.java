@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WideModule implements ICommands {
@@ -26,27 +27,29 @@ public class WideModule implements ICommands {
             //Modify amount of spaces if specified
             if (Character.digit(args.get(0).charAt(0), 10) > 0) {
 
-                wideAmount = Integer.parseInt(args.get(0));
+                try {
+                    wideAmount = Integer.parseInt(args.get(0));
 
-                List<String> newArgs = args.subList(1, args.size());
+                    List<String> newArgs = args.subList(1, args.size());
 
-                //Check arguments again
-                if (newArgs.isEmpty()) {
-                    sendWideHistory(textChannel, wideAmount);
-                    return;
-                }
-                else {
-                    message = String.join(" ", newArgs);
+                    //Check arguments again
+                    if (newArgs.isEmpty()) {
+                        sendWideHistory(textChannel, wideAmount);
+                        return;
+                    }
+                    else {
+                        args = newArgs;
+                    }
+                }catch (NumberFormatException e) {
+                    e.printStackTrace();
                 }
             }
-            else {
-                message = String.join(" ", args);
-            }
-
         }
 
         //Add the spaces
-        textChannel.sendMessage(message.replace("", " ".repeat(Math.max(0, wideAmount)))).queue();
+        message = addSpaces(args);
+
+        textChannel.sendMessage(message.replace(" ", " ".repeat(Math.max(0, wideAmount)))).queue();
 
     }
 
@@ -72,5 +75,20 @@ public class WideModule implements ICommands {
                 .queue((message) ->
                         textChannel.sendMessage(message.getContentDisplay().replace("", " ".repeat(Math.max(0, wideAmount)))).queue()
                 );
+    }
+
+    private String addSpaces(List<String> args) {
+        List<String> newArgs = new ArrayList<>();
+
+        for (int i=0; i<args.size(); i++) {
+            if (args.get(i).matches("^.*[^a-zA-Z0-9 ].*$")) {
+                newArgs.add(args.get(i));
+            }
+            else {
+                newArgs.add(args.get(i).replace("", " "));
+            }
+        }
+
+        return String.join(" ", newArgs);
     }
 }

@@ -2,9 +2,6 @@ package talos.bot.helpers;
 
 import talos.bot.Config;
 import talos.bot.commands.CommandsContext;
-import talos.bot.commands.ICommands;
-
-import java.util.List;
 
 public class MessageHelper {
 

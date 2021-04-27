@@ -17,19 +17,33 @@ public class StatusModule implements ICommands {
         JDA jda = commandsContext.getJDA();
         MessageHelper messageHelper = new MessageHelper(commandsContext, this.getName());
 
+        final List<String> args = commandsContext.getArgs();
+
+        //Size check
+        if (!messageHelper.checkArgs(1)) {
+            return;
+        }
+
+        //Reset the status
+        if (args.get(0).equals("reset")) {
+            jda.getPresence().setPresence(OnlineStatus.ONLINE, null);
+            return;
+        }
+
         //Set the status
-        if (messageHelper.checkArgs(1)) {
-            switch (commandsContext.getArgs().get(0).toLowerCase(Locale.ROOT)){
-                case "reset":
-                    jda.getPresence().setPresence(OnlineStatus.ONLINE, null); break;
+        if (messageHelper.checkArgs(2)) {
+
+            final String statusMessage = String.join(" ", args.subList(1, args.size()));
+
+            switch (args.get(0).toLowerCase(Locale.ROOT)){
                 case "playing":
-                    jda.getPresence().setActivity(Activity.playing(messageHelper.stripCommandName().replace("playing", ""))); break;
+                    jda.getPresence().setActivity(Activity.playing(statusMessage)); break;
                 case "watching":
-                    jda.getPresence().setActivity(Activity.watching(messageHelper.stripCommandName().replace("watching", ""))); break;
+                    jda.getPresence().setActivity(Activity.watching(statusMessage)); break;
                 case "listening":
-                    jda.getPresence().setActivity(Activity.listening(messageHelper.stripCommandName().replace("listening", ""))); break;
+                    jda.getPresence().setActivity(Activity.listening(statusMessage)); break;
                 default:
-                    jda.getPresence().setActivity(Activity.watching(messageHelper.stripCommandName())); break;
+                    jda.getPresence().setActivity(Activity.watching(String.join(" ", args))); break;
             }
             messageHelper.sendMessage("Status successfully set.");
         }

@@ -2,3 +2,4 @@ NAME_OF_REGEX;PATTERN_TO_MATCH;RESPONSE
 No Problem;np;DISCOVERED
 Geefa;[Gg][Ee][Ee][Ff][Aa];OH YES
 test;[Bb]rian;🅱️
+b;^b\w;ba

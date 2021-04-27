@@ -21,6 +21,7 @@ public class StatusModule implements ICommands {
 
         //Size check
         if (!messageHelper.checkArgs(1)) {
+            messageHelper.sendMessage("Please enter a valid status next time.");
             return;
         }
 

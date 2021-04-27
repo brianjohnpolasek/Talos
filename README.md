@@ -94,7 +94,7 @@ An example environment file has been provided in the code above to understand th
 * [Shadow Jar][Shadow] - For creating fat jar files through Gradle.
 * [dotenv java][DotEnv] - Used for simplifying setting up environment variables.
 * [LavaPlayer][LavaPlayer] - Java API for handling audio streaming in Discord.
-* [AWS SDK][AWS] - For storing remote data.
+* [AWS SDK][AWS] - Uses Amazon S3 for persistent runtime storage.
 * [Stock API][YahooAPI] - Library for retrieving stock data from Yahoo Finance.
 
 <!-- Links -->

@@ -63,6 +63,11 @@ public class DiscordListener extends ListenerAdapter {
             handler.handle(event);
         }
 
+        //RESPOND TO MENTION
+        if (event.getMessage().getMentionedMembers().toString().contains(Config.get("BOT_ID"))) {
+            channel.sendMessage(event.getMember().getAsMention() + " what up?").queue();
+        }
+
         //REGEX SEARCH
         regexHelper.refreshRegex();
 
@@ -89,6 +94,5 @@ public class DiscordListener extends ListenerAdapter {
                     .sendMessage("HELLO THERE!" + nickname).queue()
             ;
         }
-
     }
 }

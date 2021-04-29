@@ -1,5 +1,6 @@
 package talos.bot.commands.modules.text;
 
+import com.vdurmont.emoji.EmojiParser;
 import net.dv8tion.jda.api.entities.TextChannel;
 import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;
@@ -81,9 +82,20 @@ public class WideModule implements ICommands {
         List<String> newArgs = new ArrayList<>();
 
         for (int i=0; i<args.size(); i++) {
-            if (args.get(i).matches("^.*[^a-zA-Z0-9 ].*$")) {
+
+            System.out.println(args.get(i));
+
+            //Ignore channels & mentions
+            if (args.get(i).matches("<(@!|#)[0-9]{18}>")) {
                 newArgs.add(args.get(i));
             }
+
+            //Ignore emojis
+            else if (!EmojiParser.extractEmojis(args.get(i)).isEmpty()) {
+                newArgs.add(args.get(i));
+            }
+
+            //Add spaces to everything else
             else {
                 newArgs.add(args.get(i).replace("", " "));
             }

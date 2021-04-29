@@ -50,6 +50,7 @@ public class WideModule implements ICommands {
         //Add the spaces
         message = addSpaces(args);
 
+        //Extend spaces by specified amount (default 1)
         textChannel.sendMessage(message.replace(" ", " ".repeat(Math.max(0, wideAmount)))).queue();
 
     }
@@ -85,8 +86,8 @@ public class WideModule implements ICommands {
 
             System.out.println(args.get(i));
 
-            //Ignore channels & mentions
-            if (args.get(i).matches("<(@!|#)[0-9]{18}>")) {
+            //Ignore channels, roles & mentions
+            if (args.get(i).matches("<(@&|@!|#)[0-9]{18}>")) {
                 newArgs.add(args.get(i));
             }
 

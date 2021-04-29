@@ -96,6 +96,7 @@ An example environment file has been provided in the code above to understand th
 * [LavaPlayer][LavaPlayer] - Java API for handling audio streaming in Discord.
 * [AWS SDK][AWS] - Uses Amazon S3 for persistent runtime storage.
 * [Stock API][YahooAPI] - Library for retrieving stock data from Yahoo Finance.
+* [emoji-Java][EmojiJava] - Used for using emojis in Java.
 
 <!-- Links -->
 [Gradle]: https://gradle.org/releases/
@@ -105,3 +106,4 @@ An example environment file has been provided in the code above to understand th
 [LavaPlayer]: https://github.com/sedmelluq/lavaplayer
 [AWS]: https://aws.amazon.com/getting-started/tools-sdks/
 [YahooAPI]: https://financequotes-api.com/
+[EmojiJava]: https://github.com/vdurmont/emoji-java

@@ -19,19 +19,30 @@ Java bot for Discord built using [JDA][JDA].
    * _Optional:_ Download and install an IDE (I use IntelliJ), which will automatically get Gradle running.
 
 
-3. Clone or download this repo
+3. Create a new bot on the Discord Developer Portal website and add the bot to your server.
 
 
-4. Navigate to the root directory of the local copy of the repo either via the terminal or by opening the folder in IntelliJ and choosing the Gradle option.
+4. Clone or download this repo to your local machine.
 
 
-5. In order for Talos to run and connect to Discord, the environment variables need to be setup. This requires adding the correct information to either a new file called '.env' in the root directory, or by adding the variables to the run configuration of your IDE. An example list can be found in the file '.env-template'.
+5. Navigate to the root directory of the local copy of the repo either via the terminal or by opening the folder in IntelliJ and choosing the Gradle option.
 
 
-6. Use ```gradle build``` in the terminal or "ctrl-f9" in IntelliJ to automatically download all necessary dependencies.
+6. In order for Talos to run and connect to Discord, the environment variables need to be setup. This requires adding the correct information to either a new file called '.env' in the root directory, or by adding the variables to the run configuration of your IDE. An example list can be found in the file '.env-template'.
+The bot token can be found on the Discord Developer Portal website. Any id's needed can be copied from Discord by right-clicking on the corresponding item.
 
 
-7. To run Talos, use ```gradle run```, or use 'shift+f10' in IntelliJ.
+7. This bot relies on AWS S3 for persistent data storage across multiple servers. In order to use this functionality, you must create an AWS account and create a new S3 instance to get the login credentials to add to the environment variables list. (Alternatively, you could modify the code to only store the data locally).
+
+
+8. Use ```gradle build``` in the terminal or "ctrl-f9" in IntelliJ to automatically download all necessary dependencies.
+
+
+9. To run Talos, use ```gradle run```, or use 'shift+f10' in IntelliJ.
+
+
+10. Congrats! Talos is at your command!
+
 ---
 ### Commands
 The commands are currently categorized into sections that are either text, image or audio related commands.

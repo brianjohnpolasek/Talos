@@ -18,10 +18,12 @@ public class AudioHelper {
         this.commandsContext = commandsContext;
     }
 
-    public void join() {
+    public void join(VoiceChannel vc) {
         final TextChannel textChannel = commandsContext.getChannel();
         final Member talosMember = commandsContext.getSelfMember();
         final GuildVoiceState talosVoiceState = talosMember.getVoiceState();
+
+        VoiceChannel voiceChannel = vc;
 
         if (talosVoiceState.inVoiceChannel()) {
             textChannel.sendMessage("Talos is already in a voice channel.").queue();
@@ -31,8 +33,10 @@ public class AudioHelper {
         final AudioManager audioManager = commandsContext.getGuild().getAudioManager();
         //final VoiceChannel voiceChannel = commandsContext.getGuild().getVoiceChannelById(Config.get("MAIN_AUDIO_CHANNEL"));
 
-        //Get the default voice channel to connect to
-        final VoiceChannel voiceChannel = commandsContext.getGuild().getVoiceChannels().get(0);
+        //Get the default voice channel to connect to if no channel specified
+        if (voiceChannel == null) {
+            voiceChannel = commandsContext.getGuild().getVoiceChannels().get(0);
+        }
 
         try {
             audioManager.openAudioConnection(voiceChannel);

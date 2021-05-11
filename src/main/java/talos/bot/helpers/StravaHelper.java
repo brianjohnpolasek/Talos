@@ -2,6 +2,7 @@ package talos.bot.helpers;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import talos.bot.Config;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,12 +14,12 @@ import java.util.stream.IntStream;
 
 public class StravaHelper {
     //REMOVE LATER
-    private String client_id = "65729";
-    private String client_secret = "6299e4cbf2d6b16cd1d7766d539e5d7c1f114e68";
-    private String refresh_token = "7477964112be537be0be3a0105a581fadfbde46a";
+    private final String client_id = Config.get("STRAVA_CLIENT_ID");
+    private final String client_secret = Config.get("STRAVA_CLIENT_SECRET");
+    private final String refresh_token = Config.get("STRAVA_REFRESH_TOKEN");
 
-    private String stravaURL = "https://www.strava.com/api/v3/athlete/activities?access_token=";
-    private String authURL = "https://www.strava.com/oauth/token?client_id="
+    private final String stravaURL = "https://www.strava.com/api/v3/athlete/activities?access_token=";
+    private final String authURL = "https://www.strava.com/oauth/token?client_id="
             + client_id
             + "&client_secret="
             + client_secret

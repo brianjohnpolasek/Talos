@@ -9,6 +9,8 @@ import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;
 import talos.bot.helpers.AudioHelper;
 
+import java.util.List;
+
 @SuppressWarnings("ConstantConditions")
 public class StopModule implements ICommands {
     @Override
@@ -46,5 +48,10 @@ public class StopModule implements ICommands {
     @Override
     public String getHelp() {
         return "Stops the current song & empties the queue.";
+    }
+
+    @Override
+    public List<String> getAliases() {
+        return List.of("kill", "killmusic", "stopmusic", "end");
     }
 }

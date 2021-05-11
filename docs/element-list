@@ -1,0 +1,7 @@
+talos.bot
+talos.bot.audio
+talos.bot.aws
+talos.bot.commands
+talos.bot.commands.modules.audio
+talos.bot.commands.modules.text
+talos.bot.helpers

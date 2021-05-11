@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"talos.bot"},{"l":"talos.bot.audio"},{"l":"talos.bot.aws"},{"l":"talos.bot.commands"},{"l":"talos.bot.commands.modules.audio"},{"l":"talos.bot.commands.modules.text"},{"l":"talos.bot.helpers"}];updateSearchResults();

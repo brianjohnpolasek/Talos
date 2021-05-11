@@ -9,6 +9,7 @@ import talos.bot.helpers.RegexHelper;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 public class RegexModule implements ICommands {
@@ -30,10 +31,12 @@ public class RegexModule implements ICommands {
             switch (command.replaceAll("//s", "")) {
                 case "add": addRegex(textChannel, args.subList(1, args.size())); break;
                 case "remove": removeRegex(commandsContext, args.get(1)); break;
+                default: commandsContext.getChannel().sendMessage(Config.get("COMMAND_ERROR")).queue();
             }
         }
         else {
             switch (command.replaceAll("//s", "")) {
+                case "list": listRegex(textChannel); break;
                 case "enable": whitelist(commandsContext); break;
                 case "disable": blacklist(commandsContext); break;
                 case "enableall": RegexHelper.whitelistAll(commandsContext); break;
@@ -154,5 +157,18 @@ public class RegexModule implements ICommands {
 
     public void removeRegex(CommandsContext commandsContext, String name) {
         commandsContext.getChannel().sendMessage("FOOL! Only Brian can remove the regex command " + name).queue();
+    }
+
+    public void listRegex(TextChannel textChannel) {
+
+        textChannel.sendMessage("Here are all of the current regex commands:\n\n").queue();
+
+        RegexHelper regexHelper = new RegexHelper();
+
+        Iterator regexMapIterator = regexHelper.getRegexResponseMap().entrySet().iterator();
+
+        while (regexMapIterator.hasNext()) {
+            textChannel.sendMessage(regexMapIterator.next().toString()).queue();
+        }
     }
 }

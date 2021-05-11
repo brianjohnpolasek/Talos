@@ -141,6 +141,10 @@ public class RegexHelper {
         s3Manager.uploadObject("talostext", "regex.txt", Config.get("REGEX_PATH"));
     }
 
+    public HashMap<String, Pair<String, String>> getRegexResponseMap() {
+        return regexResponseMap;
+    }
+
     public void handle(GuildMessageReceivedEvent event, String response) {
 
         GuildChannel channel = event.getChannel();

@@ -1,5 +1,6 @@
 package talos.bot.helpers;
 
+import net.dv8tion.jda.api.EmbedBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import talos.bot.Config;
@@ -53,6 +54,12 @@ public class StravaHelper {
         return IntStream.range(0, response.length())
                 .mapToObj(index -> ((JSONObject) response.get(index)).optString("name"))
                 .collect(Collectors.toList()).toString();
+    }
+
+    public EmbedBuilder getLatestActivityData() {
+        EmbedBuilder embedBuilder = new EmbedBuilder();
+
+
     }
 
     private String getAccessToken() throws IOException {

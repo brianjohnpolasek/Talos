@@ -28,7 +28,7 @@ public class StravaHelper {
             + refresh_token
             + "&grant_type=refresh_token";
 
-    public String getActivities() throws IOException {
+    private JSONArray getActivities() throws IOException {
         URL url = new URL(stravaURL + getAccessToken());
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -49,17 +49,42 @@ public class StravaHelper {
         bufferedReader.close();
         connection.disconnect();
 
-        //Return just activity names
-        JSONArray response = new JSONArray(content.toString());
-        return IntStream.range(0, response.length())
-                .mapToObj(index -> ((JSONObject) response.get(index)).optString("name"))
-                .collect(Collectors.toList()).toString();
+        return new JSONArray(content.toString());
     }
 
-    public EmbedBuilder getLatestActivityData() {
+    public String listAllActivities() {
+
+        String activities = "";
+
+        try {
+            JSONArray response = getActivities();
+
+            activities = IntStream.range(0, response.length())
+                    .mapToObj(index -> ((JSONObject) response.get(index)).optString("name"))
+                    .collect(Collectors.toList()).toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return activities;
+    }
+
+    public EmbedBuilder getLatestActivity() {
         EmbedBuilder embedBuilder = new EmbedBuilder();
 
+        try {
+            JSONObject latestActivity = getActivities().getJSONObject(0);
 
+            System.out.println(latestActivity.toString());
+
+            embedBuilder.setTitle(latestActivity.getString("name"), "https://www.strava.com/activities/" + latestActivity.getInt("id"));
+            embedBuilder.addField("Distance (meters)", String.valueOf(latestActivity.getDouble("distance")), true);
+            embedBuilder.addField("Elapsed Time", (String.valueOf(latestActivity.getDouble("moving_time") / 60)), true);
+            embedBuilder.setFooter("Added " + latestActivity.getString("start_date"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return embedBuilder;
     }
 
     private String getAccessToken() throws IOException {

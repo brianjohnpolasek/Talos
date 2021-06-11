@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import talos.bot.Config;
 import talos.bot.commands.modules.audio.*;
+import talos.bot.commands.modules.image.BlackHole;
 import talos.bot.commands.modules.text.*;
 
 import javax.annotation.Nullable;
@@ -25,6 +26,7 @@ public class CommandHandler {
         setCommand(new RegexModule());
         setCommand(new WideModule());
         setCommand(new StravaModule());
+        setCommand(new SayModule());
         setCommand(new HelpModule(this));
 
         //Audio Commands
@@ -37,6 +39,9 @@ public class CommandHandler {
         setCommand(new RepeatModule());
         setCommand(new StopModule());
         setCommand(new VolumeModule());
+
+        //Image Commands
+        setCommand(new BlackHole());
     }
 
     //Check if command exists, adds if not

@@ -12,11 +12,7 @@ public class SayModule implements ICommands {
 
         TextChannel channel = commandsContext.getChannel();
 
-        channel.getHistory().retrievePast(1)
-                .map(messages -> messages.get(0))
-                .queue((message) ->
-                        channel.deleteMessageById(message.getId()).queue()
-        );
+        commandsContext.getMessage().delete().queue();
 
         channel.sendMessage(commandsContext.getMessage()
                 .getContentRaw()

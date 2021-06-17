@@ -28,6 +28,7 @@ public class CommandHandler {
         setCommand(new StravaModule());
         setCommand(new SayModule());
         setCommand(new AboutModule());
+        setCommand(new YeetModule());
         setCommand(new HelpModule(this));
 
         //Audio Commands

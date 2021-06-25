@@ -28,13 +28,18 @@ public class ImageHelper {
         return null;
     }
 
-    public void sendImage(TextChannel channel) {
-        File image = null;
-        if ((image = getLatestImage(channel)) != null) {
-            channel.sendFile(image).queue();
+    public void sendImage(TextChannel channel, File image) {
+        if (image == null) {
+            if ((image = getLatestImage(channel)) != null)
+            {
+                channel.sendFile(image).queue();
+            }
+            else {
+                channel.sendMessage("Could not find valid image.").queue();
+            }
         }
         else {
-            channel.sendMessage("Could not find valid image.").queue();
+            channel.sendFile(image).queue();
         }
     }
 

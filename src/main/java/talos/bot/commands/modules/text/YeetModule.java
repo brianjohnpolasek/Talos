@@ -4,51 +4,71 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.TextChannel;
 import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;
+import talos.bot.helpers.ImageHelper;
 
 import java.util.List;
+import java.util.Random;
 
 public class YeetModule implements ICommands {
     @Override
     public void handle(CommandsContext commandsContext) {
 
         TextChannel textChannel = commandsContext.getChannel();
-
         List<String> args = commandsContext.getArgs();
+
+        JDA jda = commandsContext.getJDA();
+
+        String message;
+        String otherTextChannelID;
 
         //Validate number of args
         if (args.size() < 1){
-            textChannel.sendMessage("Invalid arguments, type '%help yeet' for more information.").queue();
+            List<TextChannel> allChannels = jda.getTextChannels();
+
+            otherTextChannelID = allChannels.get(new Random().nextInt(allChannels.size())).getId();
+        }
+        else {
+            otherTextChannelID = args.get(0);
         }
 
-        String message;
-        String channel = args.get(0);
 
         //Grab previous message if not provided
-        if (args.size() == 1) {
+        if (args.size() <= 1) {
             message = textChannel.getHistory().retrievePast(2).complete().get(1).getContentRaw();
         }
         else {
             message = String.join(" ", args.subList(1, args.size()));
         }
 
-        JDA jda = commandsContext.getJDA();
-        TextChannel otherTextChannel = jda.getTextChannelById(args.get(0));
+        TextChannel otherTextChannel = jda.getTextChannelById(otherTextChannelID);
 
-        //Validate channel id
+
+        //Validate otherTextChannel id
         if (otherTextChannel == null) {
-            textChannel.sendMessage("Talos does not have access to the channel " + channel).queue();
+            textChannel.sendMessage("Talos does not have access to the channel " + otherTextChannelID).queue();
+            return;
         }
 
-        assert otherTextChannel != null;
-        otherTextChannel.sendMessage(message).queue();
 
+        // Validate message
+        if (message.isEmpty()) {
+            ImageHelper imageHelper = new ImageHelper();
+            imageHelper.sendImage(otherTextChannel, imageHelper.getLatestImage(textChannel));
+
+            message = "";
+        }
+        else {
+            otherTextChannel.sendMessage(message).queue();
+        }
+
+        // Send success report
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder
-                .append("Message '")
-                .append(message)
-                .append("' successfully yeeted to channel '")
-                .append(jda.getTextChannelById(channel).getName())
+                .append("Message ")
+                .append("" + message + "")
+                .append(" successfully yeeted to otherTextChannel '")
+                .append(jda.getTextChannelById(otherTextChannelID).getName())
                 .append("'.");
 
         textChannel.sendMessage(stringBuilder.toString()).queue();
@@ -61,6 +81,7 @@ public class YeetModule implements ICommands {
 
     @Override
     public String getHelp() {
-        return "Send messages to other servers.";
+        return "Send messages or images to other servers either to random or to a specified channel: ."
+                + "**Usage:** %yeet [CHANNEL_ID_OR_EMPTY] [MESSAGE_OR_EMPTY]";
     }
 }

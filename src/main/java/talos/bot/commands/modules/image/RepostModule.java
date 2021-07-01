@@ -12,7 +12,7 @@ public class RepostModule implements ICommands {
 
         ImageHelper imageHelper = new ImageHelper();
 
-        imageHelper.sendImage(channel);
+        imageHelper.sendImage(channel, null);
     }
 
     @Override

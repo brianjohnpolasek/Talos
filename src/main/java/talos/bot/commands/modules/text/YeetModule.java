@@ -2,6 +2,7 @@ package talos.bot.commands.modules.text;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.TextChannel;
+import talos.bot.Config;
 import talos.bot.commands.CommandsContext;
 import talos.bot.commands.ICommands;
 import talos.bot.helpers.ImageHelper;
@@ -82,6 +83,8 @@ public class YeetModule implements ICommands {
     @Override
     public String getHelp() {
         return "Send messages or images to other servers either to random or to a specified channel: ."
-                + "**Usage:** %yeet [CHANNEL_ID_OR_EMPTY] [MESSAGE_OR_EMPTY]";
+                + "**Usage:** +"
+                + Config.get("PREFIX")
+                + "yeet [CHANNEL_ID_OR_EMPTY] [MESSAGE_OR_EMPTY]";
     }
 }

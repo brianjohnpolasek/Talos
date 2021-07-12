@@ -7,7 +7,7 @@ import talos.bot.helpers.ImageHelper;
 
 import java.io.File;
 
-public class RepostModule implements ICommands {
+public class NegativeModule implements ICommands {
     @Override
     public void handle(CommandsContext commandsContext) {
         TextChannel channel = commandsContext.getChannel();
@@ -16,16 +16,16 @@ public class RepostModule implements ICommands {
 
         File image = imageHelper.getLatestImage(channel);
 
-        imageHelper.sendImage(channel, image);
+        imageHelper.negativeImage(channel, image);
     }
 
     @Override
     public String getName() {
-        return "repost";
+        return "negative";
     }
 
     @Override
     public String getHelp() {
-        return "Reposts attached image or latest valid image.";
+        return "Inverts a given image or the most recent image if no image is provided.";
     }
 }

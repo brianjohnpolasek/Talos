@@ -31,6 +31,10 @@ public class ImageHelper {
         return null;
     }
 
+    public void deleteImage(File image) {
+        image.delete();
+    }
+
     public void sendImage(TextChannel channel, File image) {
         if (image == null) {
             channel.sendMessage("Could not find valid image.").queue();

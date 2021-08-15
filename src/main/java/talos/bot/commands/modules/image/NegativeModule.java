@@ -17,6 +17,7 @@ public class NegativeModule implements ICommands {
         File image = imageHelper.getLatestImage(channel);
 
         imageHelper.negativeImage(channel, image);
+        imageHelper.deleteImage(image);
     }
 
     @Override

@@ -17,6 +17,7 @@ public class RepostModule implements ICommands {
         File image = imageHelper.getLatestImage(channel);
 
         imageHelper.sendImage(channel, image);
+        imageHelper.deleteImage(image);
     }
 
     @Override

@@ -133,6 +133,8 @@ public class RegexHelper {
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             scanner.close();
         }

@@ -119,24 +119,21 @@ public class RegexHelper {
         }
 
         //Refresh regex map with data from regex text file
-        Scanner scanner = null;
         try {
             File regexTextFile = new File(Config.get("REGEX_PATH"));
-            scanner = new Scanner(regexTextFile);
+            try (Scanner scanner = new Scanner(regexTextFile)) {
+                while (scanner.hasNext()) {
+                    String[] sections = scanner.nextLine().split(";");
 
-            while (scanner.hasNext()) {
-                String[] sections = scanner.nextLine().split(";");
-
-                if (sections.length == 3) {
-                    regexResponseMap.put(sections[0], Pair.of(sections[1], sections[2]));
+                    if (sections.length == 3) {
+                        regexResponseMap.put(sections[0], Pair.of(sections[1], sections[2]));
+                    }
                 }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            scanner.close();
         }
     }
 

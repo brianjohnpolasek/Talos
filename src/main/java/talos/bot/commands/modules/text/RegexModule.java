@@ -134,16 +134,12 @@ public class RegexModule implements ICommands {
 
         //Attempt to write the new command to the file
         newRegexCommand = "\n" + newRegexCommand;
-        FileWriter regexFile = null;
 
-        try {
-            regexFile = new FileWriter(Config.get("REGEX_PATH"), true);
-
-            BufferedWriter regexOut = new BufferedWriter(regexFile);
+        try (
+            FileWriter regexFile = new FileWriter(Config.get("REGEX_PATH"), true);
+            BufferedWriter regexOut = new BufferedWriter(regexFile)) {
 
             regexOut.write(newRegexCommand);
-            regexOut.close();
-            regexFile.close();
         } catch (IOException e) {
             e.printStackTrace();
             textChannel.sendMessage("Failed to add new regex command.").queue();

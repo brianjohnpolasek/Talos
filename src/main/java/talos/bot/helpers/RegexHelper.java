@@ -119,9 +119,10 @@ public class RegexHelper {
         }
 
         //Refresh regex map with data from regex text file
+        Scanner scanner = null;
         try {
             File regexTextFile = new File(Config.get("REGEX_PATH"));
-            Scanner scanner = new Scanner(regexTextFile);
+            scanner = new Scanner(regexTextFile);
 
             while (scanner.hasNext()) {
                 String[] sections = scanner.nextLine().split(";");
@@ -130,10 +131,10 @@ public class RegexHelper {
                     regexResponseMap.put(sections[0], Pair.of(sections[1], sections[2]));
                 }
             }
-
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } finally {
+            scanner.close();
         }
     }
 
